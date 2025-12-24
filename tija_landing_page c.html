@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Tija - Your profit partner. Track spending, discover investments, and make profit from every shilling.">
+    <title>Tija - Your Profit Partner | Money & Investment Tracker</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            color: #263238;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 20px 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.05);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 32px;
+            font-weight: 900;
+            color: #263238;
+            letter-spacing: 2px;
+        }
+
+        .logo-t {
+            color: #00C853;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #263238;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #00C853;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s;
+            display: inline-block;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            font-family: 'Manrope', sans-serif;
+        }
+
+        .btn-primary {
+            background: #00C853;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #00E676;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,200,83,0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #00C853;
+            border: 2px solid #00C853;
+        }
+
+        .btn-secondary:hover {
+            background: #00C853;
+            color: white;
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 80px;
+            background: linear-gradient(135deg, #00C853 0%, #00E676 100%);
+            padding: 120px 20px;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 80%;
+            height: 200%;
+            background: rgba(255,255,255,0.1);
+            transform: rotate(-15deg);
+        }
+
+        .hero-content {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 64px;
+            font-weight: 900;
+            margin-bottom: 20px;
+            line-height: 1.1;
+            text-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .hero .tagline {
+            font-size: 28px;
+            margin-bottom: 15px;
+            font-weight: 600;
+            opacity: 0.95;
+        }
+
+        .hero .description {
+            font-size: 20px;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+
+        .launch-badge {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 20px;
+            display: inline-block;
+            margin-bottom: 20px;
+            font-weight: 700;
+            font-size: 14px;
+            border: 2px solid white;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .hero .btn-primary {
+            background: white;
+            color: #00C853;
+            font-size: 18px;
+            padding: 16px 40px;
+        }
+
+        .hero .btn-secondary {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: 2px solid white;
+            font-size: 18px;
+            padding: 16px 40px;
+        }
+
+        .hero .btn-secondary:hover {
+            background: white;
+            color: #00C853;
+        }
+
+        /* Stats Section */
+        .stats {
+            padding: 80px 20px;
+            background: white;
+        }
+
+        .stats-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            text-align: center;
+        }
+
+        .stat-card {
+            padding: 30px;
+        }
+
+        .stat-number {
+            font-size: 56px;
+            font-weight: 900;
+            color: #00C853;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: 18px;
+            color: #666;
+            font-weight: 500;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 100px 20px;
+            background: #f5f5f5;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 48px;
+            font-weight: 900;
+            margin-bottom: 20px;
+            color: #263238;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 20px;
+            color: #666;
+            margin-bottom: 60px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            font-weight: 500;
+        }
+
+        .features-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 30px rgba(0,200,83,0.15);
+        }
+
+        .feature-icon {
+            font-size: 56px;
+            margin-bottom: 20px;
+        }
+
+        .feature-title {
+            font-size: 24px;
+            font-weight: 800;
+            margin-bottom: 15px;
+            color: #263238;
+        }
+
+        .feature-description {
+            color: #666;
+            font-size: 16px;
+            line-height: 1.6;
+            font-weight: 500;
+        }
+
+        /* How It Works */
+        .how-it-works {
+            padding: 100px 20px;
+            background: white;
+        }
+
+        .steps {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .step {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+            margin-bottom: 60px;
+        }
+
+        .step:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .step-number {
+            flex-shrink: 0;
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #00C853 0%, #00E676 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            font-weight: 900;
+            color: white;
+            box-shadow: 0 8px 20px rgba(0,200,83,0.3);
+        }
+
+        .step-content h3 {
+            font-size: 28px;
+            margin-bottom: 15px;
+            color: #263238;
+            font-weight: 800;
+        }
+
+        .step-content p {
+            font-size: 18px;
+            color: #666;
+            line-height: 1.6;
+            font-weight: 500;
+        }
+
+        /* Pricing */
+        .pricing {
+            padding: 100px 20px;
+            background: #f5f5f5;
+        }
+
+        .pricing-cards {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .pricing-card {
+            background: white;
+            padding: 50px 40px;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            text-align: center;
+            position: relative;
+        }
+
+        .pricing-card.featured {
+            border: 3px solid #00C853;
+            transform: scale(1.05);
+        }
+
+        .pricing-badge {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #00C853;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-weight: 800;
+            font-size: 14px;
+        }
+
+        .pricing-name {
+            font-size: 24px;
+            font-weight: 800;
+            margin-bottom: 10px;
+            color: #263238;
+        }
+
+        .pricing-price {
+            font-size: 48px;
+            font-weight: 900;
+            color: #00C853;
+            margin-bottom: 5px;
+        }
+
+        .pricing-period {
+            color: #666;
+            margin-bottom: 30px;
+            font-weight: 500;
+        }
+
+        .pricing-features {
+            list-style: none;
+            margin-bottom: 30px;
+            text-align: left;
+        }
+
+        .pricing-features li {
+            padding: 12px 0;
+            border-bottom: 1px solid #f0f0f0;
+            color: #555;
+            font-weight: 500;
+        }
+
+        .pricing-features li:before {
+            content: "✓ ";
+            color: #00C853;
+            font-weight: 800;
+            margin-right: 10px;
+        }
+
+        /* Email Signup */
+        .email-signup {
+            padding: 100px 20px;
+            background: linear-gradient(135deg, #263238 0%, #37474F 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .email-signup h2 {
+            font-size: 48px;
+            font-weight: 900;
+            margin-bottom: 20px;
+        }
+
+        .email-signup p {
+            font-size: 20px;
+            margin-bottom: 40px;
+            opacity: 0.9;
+            font-weight: 500;
+        }
+
+        .email-form {
+            max-width: 600px;
+            margin: 0 auto;
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .email-input {
+            flex: 1;
+            min-width: 300px;
+            padding: 18px 25px;
+            border-radius: 8px;
+            border: none;
+            font-size: 16px;
+            outline: none;
+            font-family: 'Manrope', sans-serif;
+            font-weight: 500;
+        }
+
+        .email-form .btn-primary {
+            padding: 18px 40px;
+            font-size: 18px;
+        }
+
+        .success-message {
+            display: none;
+            background: #00C853;
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            font-weight: 600;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Footer */
+        footer {
+            background: #263238;
+            color: white;
+            padding: 60px 20px 30px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-section h3 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: #00C853;
+            font-weight: 800;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-section a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-weight: 500;
+        }
+
+        .footer-section a:hover {
+            color: #00C853;
+        }
+
+        .footer-section p {
+            color: #ccc;
+            line-height: 1.8;
+            font-weight: 500;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #999;
+            font-weight: 500;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            background: #00C853;
+            transform: translateY(-3px);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 42px;
+            }
+
+            .hero .tagline {
+                font-size: 20px;
+            }
+
+            .section-title {
+                font-size: 36px;
+            }
+
+            .step {
+                flex-direction: column !important;
+                text-align: center;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .email-form {
+                flex-direction: column;
+            }
+
+            .email-input {
+                min-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo"><span class="logo-t">T</span>IJA</div>
+            <div class="nav-links">
+                <a href="#features">Features</a>
+                <a href="#how-it-works">How It Works</a>
+                <a href="#pricing">Pricing</a>
+                <a href="#signup" class="btn btn-primary">Join Waitlist</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="launch-badge"> Launching Q2 2026 • Join 10,000+ on Waitlist</div>
+            <h1>Turn Every Shilling Into Profit</h1>
+            <div class="tagline">Your profit partner</div>
+            <p class="description">Track spending. Discover investments. Make profit from your money—automatically.</p>
+            <div class="hero-buttons">
+                <a href="#signup" class="btn btn-primary">Join Early Access →</a>
+                <a href="#how-it-works" class="btn btn-secondary">See How It Works</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats -->
+    <section class="stats">
+        <div class="stats-container">
+            <div class="stat-card">
+                <div class="stat-number">KES 5K+</div>
+                <div class="stat-label">Average monthly savings expected</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">10K+</div>
+                <div class="stat-label">Early access signups</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">12.5%</div>
+                <div class="stat-label">Target investment return</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section class="features" id="features">
+        <h2 class="section-title">Everything You Need to Profit</h2>
+        <p class="section-subtitle">Stop wondering where your money goes. Start making it work for you.</p>
+        
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">📊</div>
+                <h3 class="feature-title">Smart Expense Tracking</h3>
+                <p class="feature-description">See exactly where every shilling goes. Connect M-Pesa and bank accounts for automatic tracking.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">📈</div>
+                <h3 class="feature-title">Live Investment Rates</h3>
+                <p class="feature-description">Real-time rates for NSE shares, MMFs, bonds, and more. Never miss a profit opportunity.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🤖</div>
+                <h3 class="feature-title">AI-Powered Insights</h3>
+                <p class="feature-description">Get personalized tips to save more and invest smarter. Your profit coach in your pocket.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">💰</div>
+                <h3 class="feature-title">Money Routine Analysis</h3>
+                <p class="feature-description">Discover your spending patterns. See when and where you spend most—then optimize.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🎯</div>
+                <h3 class="feature-title">Investment Discovery</h3>
+                <p class="feature-description">Find the best investment vehicles for your goals. Direct links to start investing today.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🔔</div>
+                <h3 class="feature-title">Smart Alerts</h3>
+                <p class="feature-description">Get notified when great investment opportunities pop up or when you're overspending.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="how-it-works" id="how-it-works">
+        <h2 class="section-title">Start Making Profit in 3 Steps</h2>
+        <p class="section-subtitle">Get up and running in less than 5 minutes</p>
+
+        <div class="steps">
+            <div class="step">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <h3>Connect Your Accounts</h3>
+                    <p>Link your M-Pesa and bank accounts securely. We use bank-level encryption to keep your data safe. Or start by tracking expenses manually—it's up to you.</p>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <h3>Discover Your Money Patterns</h3>
+                    <p>See where your money goes with beautiful visualizations. Find hidden leaks in your spending. Get insights into your money habits you never knew existed.</p>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                    <h3>Make Your First Profit</h3>
+                    <p>Browse live investment rates. Choose what fits your goals. Get step-by-step guidance to start investing. Watch your money grow—automatically tracked in Tija.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing -->
+    <section class="pricing" id="pricing">
+        <h2 class="section-title">Simple, Transparent Pricing</h2>
+        <p class="section-subtitle">Start free. Upgrade when you're ready to profit more.</p>
+
+        <div class="pricing-cards">
+            <div class="pricing-card">
+                <div class="pricing-name">Tija Basic</div>
+                <div class="pricing-price">Free</div>
+                <div class="pricing-period">Forever</div>
+                <ul class="pricing-features">
+                    <li>Track 50 transactions/month</li>
+                    <li>Basic spending insights</li>
+                    <li>Weekly investment rates</li>
+                    <li>Manual expense entry</li>
+                    <li>Email support</li>
+                </ul>
+                <a href="#signup" class="btn btn-secondary">Join Waitlist</a>
+            </div>
+
+            <div class="pricing-card featured">
+                <div class="pricing-badge">Early Bird Special</div>
+                <div class="pricing-name">Tija Pro</div>
+                <div class="pricing-price">KES 499</div>
+                <div class="pricing-period">per month</div>
+                <ul class="pricing-features">
+                    <li>Unlimited transactions</li>
+                    <li>M-Pesa auto-sync</li>
+                    <li>Real-time investment rates</li>
+                    <li>AI-powered profit tips</li>
+                    <li>Portfolio tracking</li>
+                    <li>Export reports</li>
+                    <li>Priority support</li>
+                </ul>
+                <a href="#signup" class="btn btn-primary">Get 3 Months Free →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Email Signup -->
+    <section class="email-signup" id="signup">
+        <h2>Join 10,000+ Early Access Members</h2>
+        <p>Be first to profit with Tija. Get 3 months premium free + exclusive launch perks.</p>
+        
+        <form class="email-form" onsubmit="handleSubmit(event)">
+            <input type="email" class="email-input" placeholder="Enter your email" required id="emailInput">
+            <button type="submit" class="btn btn-primary">Join Waitlist →</button>
+        </form>
+        <div class="success-message" id="successMessage">
+             Success! You're on the list! Check your email for next steps and exclusive updates. Welcome to Tija!
+        </div>
+        <p style="margin-top: 20px; font-size: 14px; opacity: 0.8;"> Launching Q2 2026 • No credit card required • Cancel anytime</p>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>TIJA</h3>
+                <p><strong>Mission:</strong> Tija helps everyday people in East Africa turn their money into profit through smart tracking, clear insights, and accessible investment opportunities.</p>
+                <p style="margin-top: 15px;"><strong>Vision:</strong> A future where every person can see, understand, and profit from their money—regardless of their financial background.</p>
+                <div class="social-links">
+                    <a href="#" title="Facebook">📘</a>
+                    <a href="#" title="Instagram">📷</a>
+                    <a href="#" title="Twitter">🐦</a>
+                    <a href="#" title="LinkedIn">💼</a>
+                </div>
+            </div>
+
+            <div class="footer-section">
+                <h3>Product</h3>
+                <ul>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#pricing">Pricing</a></li>
+                    <li><a href="#signup">Join Waitlist</a></li>
+                    <li><a href="#">Download App (Coming Soon)</a></li>
+                    <li><a href="#">API (Coming Soon)</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Company</h3>
+                <ul>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#">Blog (Coming Soon)</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="#">Press Kit</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section" id="contact">
+                <h3>Contact Us</h3>
+                <p><strong>Email:</strong><br><a href="mailto:kamau.francis.kihiko@gmail.com">kamau.francis.kihiko@gmail.com</a></p>
+                <p style="margin-top: 10px;"><strong>Phone/WhatsApp:</strong><br><a href="tel:+254742241585">+254 742 241 585</a></p>
+                <p style="margin-top: 10px;"><strong>Location:</strong><br>Nairobi, Kenya</p>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2025 Tija. Built by F.K.K. All rights reserved.</p>
+            <p style="margin-top: 10px; font-size: 14px;">
+                <a href="#" style="color: #999; text-decoration: none;">Privacy Policy</a> • 
+                <a href="#" style="color: #999; text-decoration: none;">Terms of Service</a> • 
+                <a href="#" style="color: #999; text-decoration: none;">Security</a>
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        function handleSubmit(event) {
+            event.preventDefault();
+            const email = document.getElementById('emailInput').value;
+            
+            // Google Forms submission (replace with your actual Google Form URL)
+            const googleFormURL = 'https://docs.google.com/forms/d/e/1FAIpQLSevmBNMh3uxqIOU-GUBUNyWbV1D99JWwt34rAwioHlPQ-p3CA/viewform';
+            const emailFieldName = 'entry.1839051370'; // Replace with actual entry ID
+            
+            // For now, just show success message
+            // In production, you would submit to Google Forms or your backend
+            fetch(googleFormURL, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: `${emailFieldName}=${encodeURIComponent(email)}`
+            }).then(() => {
+                // Show success message
+                document.getElementById('successMessage').style.display = 'block';
+                document.getElementById('emailInput').value = '';
+                
+                // Hide after 8 seconds
+                setTimeout(() => {
+                    document.getElementById('successMessage').style.display = 'none';
+                }, 8000);
+            }).catch(error => {
+                // Still show success even if fetch fails (no-cors mode)
+                document.getElementById('successMessage').style.display = 'block';
+                document.getElementById('emailInput').value = '';
+                
+                setTimeout(() => {
+                    document.getElementById('successMessage').style.display = 'none';
+                }, 8000);
+            });
+        }
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
